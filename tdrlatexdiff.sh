@@ -1,11 +1,23 @@
 #!/bin/bash
 
+if [ $# -lt 4 ]; then
+  echo "Usage: ./tdrlatexdiff.sh [cadi] [baseDir] [revision] [outputDir]"
+  echo "Example: ./tdrlatexdiff.sh HIN-18-006 /myPath/HIN-18-006 456777 ./myDiffDir"
+  exit 1
+fi
+
+cadi=$1
+baseDir=$2
+revision=$3
+outputDir=$(readlink -f ${4})
+
+echo "cadi = $cadi"
+echo "baseDir = $baseDir"
+echo "revision = $revision"
+echo "outputDir = $outputDir"
+
 set -x
 
-revision=460156
-cadi="HIN-18-006"
-baseDir="/path/to/HIN-18-006"
-outputDir=$baseDir"/"$cadi"-diff"$revision
 baseDirRel="."
 paperDir=$baseDirRel"/papers/"$cadi
 trunkDir=$paperDir"/trunk"
